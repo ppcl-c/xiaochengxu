@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        body{
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="den" placeholder="您的名字">
+<input type="text" id="pwd" placeholder="您的密码">
+<button onclick="getText()">登录</button>
+<script>
+    function getText(){
+        let den = document.getElementById("den").value;
+        let pwd = document.getElementById("pwd").value;
+        alert(den + pwd)
+        fetch("/az?den=" + encodeURIComponent(den) + "&pwd=" + encodeURIComponent(pwd))
+        alert("登录成功")
+    }
+</script>
+</body>
+</html>

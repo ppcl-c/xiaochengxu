@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+<input type="text" id="den" placeholder="用户名">
+<input type="password" id="pwd" placeholder="密码">
+<button onclick="getText()">登录</button>
+<button onclick="window.location.href='/注册'">注册</button>
+
+<script>
+    function getText() {
+        // 拿到你输入的内容
+        let am = document.getElementById("den").value;
+        let pw = document.getElementById("pwd").value;
+
+        console.log("你输入的：", am, pw);
+
+        fetch("/al")
+            .then(response => response.json())
+            .then(data => {
+                console.log("后端数据：", data);
+
+                let name = data.den;
+                let npwd = data.pwd;
+
+                console.log("比对：", am, name, pw, npwd);
+
+                // 重点：这里必须是 == 或者 ===
+                if (am === name && pw === npwd) {
+                    alert("登录成功！");
+                    window.location.href = "/lp";
+                } else {
+                    alert("登录失败！");
+                    alert(am + "!=" + name + "," + pw + "!=" + npwd)
+                }
+            })
+            .catch(err => {
+                console.log("错误：", err);
+                alert("出错了！");
+            });
+    }
+</script>
+</body>
+</html>
